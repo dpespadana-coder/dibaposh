@@ -1,12 +1,30 @@
+import subprocess
+import os
 import streamlit as st
 import pandas as pd
-import os
-import jdatetime
 import openpyxl
 from openpyxl.styles import PatternFill, Alignment
 from fpdf import FPDF
 import tempfile
 import plotly.express as px
+
+# ==========================================
+# مکانیزم همگام‌سازی خودکار دیتابیس‌های اکسل با گیت‌هاب
+# ==========================================
+def auto_sync_github():
+    try:
+        status = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
+        if status.stdout.strip():
+            subprocess.run(["git", "config", "--global", "user.email", "dibaposh@factory.com"], check=True)
+            subprocess.run(["git", "config", "--global", "user.name", "DibaPosh System"], check=True)
+            subprocess.run(["git", "add", "*.xlsx"], check=True)
+            subprocess.run(["git", "commit", "-m", "Auto-sync database files"], check=True)
+            subprocess.run(["git", "push", "origin", "main"], check=True)
+    except Exception as e:
+        pass
+
+# اجرای خودکار در شروع برنامه
+auto_sync_github()
 
 st.set_page_config(page_title="دیپاپوش اسپادانا | سامانه جامع فرماندهی صنعتی", page_icon="🧵", layout="wide")
 
