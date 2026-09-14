@@ -7,6 +7,7 @@ from openpyxl.styles import PatternFill, Alignment
 from fpdf import FPDF
 import tempfile
 import plotly.express as px
+import jdatetime
 
 # ==========================================
 # مکانیزم همگام‌سازی خودکار دیتابیس‌های اکسل با گیت‌هاب
